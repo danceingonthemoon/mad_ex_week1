@@ -38,7 +38,7 @@
  */
 
 function getCircleArea(r) {
-  // Your implementation here
+  return Math.PI * r ** 2;
 }
 
 /**
@@ -58,6 +58,11 @@ function getCircleArea(r) {
 
 function greeting(name, time) {
   // Your implementation here
+  if (time <= 12 && time >= 9) {
+    return `Good morning, ${name}!`;
+  } else if (time >= 13 && time <= 17) {
+    return `Good afternoon, ${name}!`;
+  }
 }
 
 /**
@@ -76,6 +81,13 @@ function greeting(name, time) {
 
 function checkValue(val) {
   // Your implementation here
+  if (val) {
+    return `Your input is truthy value.`;
+  } else if (!val) {
+    return `Your input is a falsy value.`;
+  } else if (!!val) {
+    return `Your input is a nullish value.`;
+  }
 }
 
 /**
@@ -92,6 +104,12 @@ function checkValue(val) {
 
 function wordLengths(sentence) {
   // Your implementation here
+  const words = sentence.split(" ");
+  const lengths = [];
+  for (let i = 0; i < length(sentence); i++) {
+    lengths.push(words[i].length);
+  }
+  return lengths;
 }
 
 /**
@@ -109,6 +127,16 @@ function wordLengths(sentence) {
 
 function capitalizeSentence(sentence) {
   // Your implementation here
+  const words = sentence.split(" ");
+  const capitalizedWords = [];
+  //captitalise the first letter of each word
+  for (const word of words) {
+    const capitalizedWord = word.charAt(0).toUpperCase() + word.slice(1);
+    capitalizedWords.push(capitalizedWord);
+  }
+  // join the captilised words into a sentence
+  const capitalizedSentence = capitalizedWords.join(" ");
+  return capitalizedSentence;
 }
 
 /**
