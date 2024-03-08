@@ -81,12 +81,12 @@ function greeting(name, time) {
 
 function checkValue(val) {
   // Your implementation here
-  if (val) {
-    return `Your input is truthy value.`;
+  if (val == null) {
+    return `Your input is a nullish value.`;
   } else if (!val) {
     return `Your input is a falsy value.`;
-  } else if (!!val) {
-    return `Your input is a nullish value.`;
+  } else if (val) {
+    return `Your input is a truthy value.`;
   }
 }
 
@@ -103,13 +103,18 @@ function checkValue(val) {
  */
 
 function wordLengths(sentence) {
-  // Your implementation here
-  const words = sentence.split(" ");
-  const lengths = [];
-  for (let i = 0; i < length(sentence); i++) {
-    lengths.push(words[i].length);
+  // your implementation here
+  if (!sentence) {
+    return [];
   }
-  return lengths;
+  // let arr = sentence.split(" ");
+  // let word_l = [];
+  // for (let i = 0; i < arr.length; i++) {
+  //   word_l.push(arr[i].length);
+  // }
+  // return word_l;
+
+  return sentence.split(" ").map((word) => word.length);
 }
 
 /**
@@ -154,6 +159,11 @@ function capitalizeSentence(sentence) {
  */
 
 function rotateArray(array, numRotations) {
+  for (let i = 0; i < numRotations; i++) {
+    let removedElement = array.pop();
+    array.unshift(removedElement);
+  }
+  return array;
   // Your implementation here
 }
 
@@ -177,7 +187,18 @@ function rotateArray(array, numRotations) {
  */
 
 function animalClassify(type, weight) {
-  // Your implementation here
+  let size = " ";
+  if (weight < 5) {
+    size = "small";
+  } else if (weight < 100) {
+    size = "big";
+  } else {
+    size = "huge";
+  }
+  return {
+    type: type,
+    size: size,
+  };
 }
 
 /**
@@ -204,7 +225,21 @@ function animalClassify(type, weight) {
  */
 
 function describePerson(person) {
-  // Your implementation here
+  const name = person.name || "Unknown ";
+  const age = person.age || 0;
+  const gender = person.gender || "Unknown";
+  const hobby = person.hobby || null;
+  if (hobby) {
+    const pronoun = gender === "m" ? "He" : "She";
+    return `${name} is a ${age}-year-old ${
+      gender === "m" ? "man" : "woman"
+    }. ${pronoun} likes ${hobby}!`;
+  } else {
+    const pronoun = gender === "m" ? "He" : "She";
+    return `${name} is a ${age}-year-old ${
+      gender === "m" ? "man" : "woman"
+    }. ${pronoun} has no hobbies.`;
+  }
 }
 
 /**
@@ -228,6 +263,23 @@ function describePerson(person) {
 
 function analyzeMarks(marks) {
   // Your implementation here
+  let markValues = Object.values(marks);
+  if (markValues.length === 0) {
+    return [0, 0, 0];
+  }
+  let sum = markValues.reduce((total, mark) => total + mark, 0);
+  let avg = Math.round((sum / markValues.length) * 100) / 100;
+  let highest = markValues[0];
+  let lowest = markValues[0];
+  for (const currentMark of markValues) {
+    if (currentMark > highest) {
+      highest = currentMark;
+    }
+    if (currentMark < lowest) {
+      lowest = currentMark;
+    }
+  }
+  return [lowest, highest, avg];
 }
 
 /**
@@ -250,6 +302,14 @@ function analyzeMarks(marks) {
 
 function check(arr, target) {
   // Your implementation here
+  const l = arr.length;
+  for (let i = 0; i < l - 1; ++i) {
+    for (let j = i + 1; j < l; ++j) {
+      if (arr[i] + arr[j] === target) {
+        return [i, j];
+      }
+    }
+  }
 }
 
 // Export the function for testing
